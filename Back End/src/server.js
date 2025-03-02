@@ -8,8 +8,10 @@ import createError from "http-errors";
 import { ConnectDB } from "./config/mongoose.js";
 import productRouter from "./routes/Product.route.js";
 import allProductsRouter from "./routes/allproducts.route.js";
-import userModel from "./models/user.model.js";
-import createUserRouter from "./routes/auth.router.js";
+import authRouter from "./routes/auth.router.js";
+import userRouter from "./routes/user.route.js";
+// import verifyUserRouter from "./routes/auth.router.js";
+//import { verify } from "jsonwebtoken";
 config();
 
 const app = express();
@@ -40,9 +42,11 @@ app.use(
 //     if (!req.user) return next(createError(401, 'Please login to view this page.'))
 //     next()
 // })
-app.use('/', productRouter);
-app.use('/', allProductsRouter);
-app.use('/user', createUserRouter)
+app.use('/product', productRouter);
+app.use('/all-products', allProductsRouter);
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+
 
 export default app   
 
